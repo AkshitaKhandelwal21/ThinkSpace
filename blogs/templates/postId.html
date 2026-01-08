@@ -55,7 +55,7 @@
                                     style="font-weight: 700; font-size: 2.5rem; color: #2d3748; line-height: 1.3; margin: 0; flex: 1;">
                                     {{ post.title }}
                                 </h1>
-
+                                {% if user == post.author or user.is_admin %}
                                 <form method="POST" action="{% url 'delete_post' pk=post.id %}" style="display: inline;"
                                     onsubmit="return confirm('Are you sure you want to delete this post? This action cannot be undone.');">
                                     {% csrf_token %}
@@ -66,6 +66,7 @@
                                         <i class="fas fa-trash-alt me-2"></i>Delete
                                     </button>
                                 </form>
+                                {% endif %}
                             </div>
 
                             <!-- Post Meta -->
@@ -82,8 +83,7 @@
                                             {{ post.author.username|default:"Anonymous" }}
                                         </p>
                                         <small style="color: #718096; font-size: 0.85rem;">
-                                            <i class="far fa-calendar me-1"></i>{{ post.created_at|default:"Jan 7, 2026"
-                                            }}
+                                            <i class="far fa-calendar me-1"></i>{{ post.created_at|default:"Jan 7, 2026" }}
                                         </small>
                                     </div>
                                 </div>
@@ -107,8 +107,9 @@
                         <!-- Post Content Body -->
                         <div style="color: #2d3748; font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
                             {{ post.content|safe }}
-                        </div>
+                        </div>  
                         <div>
+                            {% if user == post.author or user.is_admin %}
                             <button
                                 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; padding: 0.75rem 2rem; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);"
                                 onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)';"
@@ -116,6 +117,7 @@
                                 <a href="{% url 'post_update' pk=post.id %}" style="text-decoration: none; color: white;">
                                     <i class="fas fa-pen me-1"></i>Update</a>
                             </button>
+                            {% endif %}
                         </div>
                     </div>
                 </article>
@@ -145,7 +147,7 @@
                     </div>
 
                     <!-- Comments List -->
-                    {% for comment in post.comments.all %}
+                    {% for comment in comments %}
                     <div style="border-top: 1px solid #e2e8f0; padding: 1.5rem 0;">
                         <div style="display: flex; gap: 1rem;">
                             <div class="rounded-circle d-flex align-items-center justify-content-center"
@@ -163,12 +165,6 @@
                                             {{ comment.created_at }}
                                         </small>
                                     </div>
-                                    <button
-                                        style="background: none; border: none; color: #718096; cursor: pointer; padding: 0; font-size: 0.85rem; transition: color 0.3s ease;"
-                                        onmouseover="this.style.color='#667eea';"
-                                        onmouseout="this.style.color='#718096';">
-                                        <i class="fas fa-reply me-1"></i>Reply
-                                    </button>
                                 </div>
                                 <p style="color: #4a5568; line-height: 1.6; margin: 0; font-size: 0.95rem;">
                                     {{ comment.content }}

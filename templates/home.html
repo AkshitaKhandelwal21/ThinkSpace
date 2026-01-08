@@ -29,9 +29,40 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Categories</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            <span class="user-avatar">
+                                {{ user.username|first|upper }}
+                            </span>
+                        </a>
+
+                        <!-- <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown"> -->
+                    <li>
+                        <a class="dropdown-item" href="">
+                            <i class="fas fa-user me-2"></i> Profile
+                        </a>
                     </li>
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button>Logout</button>
+                        <!-- <li>
+                            <a class="dropdown-item" href="">
+                                <i class="fas fa-sign-out-alt me-2"></i> Logout
+                            </a>
+                        </li> -->
+                    </form>
+
+                    <!-- </ul> -->
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    {% endif %}
+
                     <li class="nav-item">
                         <a href="{% url 'create_post' %}" class="btn btn-light ms-2" style="border-radius: 20px;">
                             <i class="fas fa-pen me-1"></i>Write
@@ -80,9 +111,10 @@
                             {{ p.content|truncatechars:100 }}{% if p.content|length > 100 %} {% endif %}
                         </p>
                         {% if p.content|length > 100 %}
-                        <a href="{% url 'post_id' p.pk %}" style="text-align: center; text-decoration: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 25px; padding: 10px 24px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                        <a href="{% url 'post_id' p.pk %}"
+                            style="text-align: center; text-decoration: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 25px; padding: 10px 24px; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
                             Show More
-                        <i class="fas fa-arrow-right ms-1"></i></a>
+                            <i class="fas fa-arrow-right ms-1"></i></a>
                         {% endif %}
                     </div>
                 </div>

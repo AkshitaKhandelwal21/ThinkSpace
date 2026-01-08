@@ -24,6 +24,18 @@ class PostsList(TemplateView):
         raise HTTPException(e)
     
 
+
+class CreatePost(LoginRequiredMixin, CreateView):
+    form_class = CreatePostForm
+    model = Post
+    template_name = 'create_post.html'
+    success_url = reverse_lazy('all_posts')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = UpdatePostForm
@@ -61,6 +73,8 @@ class OnePost(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentPostForm()
+        context['comments'] = self.object.comments.filter(
+            is_approved=True).select_related('user')
         return context
 
 
@@ -78,13 +92,3 @@ class OnePostComment(LoginRequiredMixin, CreateView):
         form.instance.post = post
         return super().form_valid(form)
     
-
-class CreatePost(LoginRequiredMixin, CreateView):
-    form_class = CreatePostForm
-    model = Post
-    template_name = 'create_post.html'
-    success_url = reverse_lazy('all_posts')
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)

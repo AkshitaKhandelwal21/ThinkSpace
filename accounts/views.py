@@ -10,8 +10,8 @@ from accounts.serializers import RegisterSerializer
 from blogs.models import Post
 
 # Create your views here.
-class HomeView(TemplateView):
-    template_name = 'home.html'
+# class HomeView(TemplateView):
+#     template_name = 'home.html'
 
 class Register(CreateView):
     model = User
@@ -23,7 +23,6 @@ class Register(CreateView):
 class Login(FormView):  
     form_class = LoginForm
     template_name = 'login.html'
-    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         print(form)
@@ -35,4 +34,5 @@ class Login(FormView):
             return redirect('/users/login')
         else:
             login(self.request, user)
-            return redirect('/users/home')
+            return redirect('/allblogs')
+        
