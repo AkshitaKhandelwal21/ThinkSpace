@@ -5,5 +5,6 @@ from blogs import views
 urlpatterns = [
     path('allblogs', views.PostsList.as_view(), name='all_posts'),
     path('newblog', views.CreatePost.as_view(), name='create_post'),
-    path('post/<int:pk>/', views.OnePost.as_view(), name='post_id')
+    path('post/<int:pk>/', views.OnePost.as_view(), name='post_id'),
+    path('post/<int:pk>/comment/', views.OnePostComment.as_view(), name='comment')
 ]

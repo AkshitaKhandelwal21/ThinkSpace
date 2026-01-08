@@ -115,8 +115,10 @@
 
                     <!-- Add Comment Form -->
                     <div style="margin-bottom: 2rem;">
-                        <form method="POST" action="">
-                            <textarea class="form-control mb-3" rows="4" placeholder="Share your thoughts..." style="border: 2px solid #e2e8f0; border-radius: 12px; padding: 1rem; font-size: 1rem; line-height: 1.6; transition: all 0.3s ease; resize: vertical;" onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 4px rgba(102, 126, 234, 0.1)';" onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none';"></textarea>
+                        <form method="POST" action="{% url 'comment' pk=post.id %}">
+                            {% csrf_token %}
+                            {{ form }}
+                            <!-- <textarea class="form-control mb-3" rows="4" placeholder="Share your thoughts..." style="border: 2px solid #e2e8f0; border-radius: 12px; padding: 1rem; font-size: 1rem; line-height: 1.6; transition: all 0.3s ease; resize: vertical;" onfocus="this.style.borderColor='#667eea'; this.style.boxShadow='0 0 0 4px rgba(102, 126, 234, 0.1)';" onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none';"></textarea> -->
                             <button type="submit" class="btn" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; padding: 0.75rem 2rem; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';">
                                 <i class="fas fa-paper-plane me-2"></i>Post Comment
                             </button>
