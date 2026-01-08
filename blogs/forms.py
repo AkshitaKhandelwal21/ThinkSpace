@@ -21,3 +21,19 @@ class CreatePostForm(forms.ModelForm):
                 'placeholder': 'Write your story...'
             })
         }
+
+
+class UpdatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Title cannot be empty',
+            }),
+            'content': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Add a content'
+            })
+        }
