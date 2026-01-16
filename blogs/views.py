@@ -4,10 +4,12 @@ from django.urls import reverse, reverse_lazy
 from rest_framework import generics
 from blogs.forms import CreatePostForm, UpdatePostForm
 from blogs.models import Post
+from blogs.paginations import CustomPagination, MyCursorPagination
 from comments.forms import CommentPostForm
 from comments.models import Comment
-from blogs.serilaizer import PostSerializer
-from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView
+from blogs.serilaizer import CommentSerializer, PostSerializer
+from django.views.generic import *
+from rest_framework.generics import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -22,11 +24,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 #             return context
 #     except Exception as e:
 #         raise HTTPException(e)
-    
 
-class PostsList(generics.ListAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
 
 
 # class CreatePost(LoginRequiredMixin, CreateView):
@@ -39,13 +37,6 @@ class PostsList(generics.ListAPIView):
 #         form.instance.author = self.request.user
 #         return super().form_valid(form)
 
-
-class CreatePost(LoginRequiredMixin, generics.CreateAPIView):
-    model = Post
-    serializer_class = PostSerializer
-    
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
 
 
 # class PostUpdate(LoginRequiredMixin, UpdateView):
@@ -62,11 +53,6 @@ class CreatePost(LoginRequiredMixin, generics.CreateAPIView):
 #     def get_success_url(self):
 #         return reverse('post_id', kwargs={'pk':self.kwargs['pk']})
 
-
-class PostUpdate(generics.RetrieveUpdateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    lookup_field = 'pk'
     
 
 # class PostDelete(LoginRequiredMixin, DeleteView):
@@ -81,12 +67,7 @@ class PostUpdate(generics.RetrieveUpdateAPIView):
 
     # def get_success_url(self):
     #     return reverse('allblogs', kwargs={'pk':self.kwargs['pk']})
-
-
-class PostDelete(generics.DestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    lookup_field = 'pk'   
+ 
 
 
 # class OnePost(LoginRequiredMixin, DetailView):
@@ -102,31 +83,31 @@ class PostDelete(generics.DestroyAPIView):
 #         return context
 
 
-class OnePost(generics.RetrieveAPIView):
+    
+
+
+
+# ********************************** Blogs with DRF *************************************
+
+class BlogsView(ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    
+    # pagination_class = CustomPagination
+    pagination_class = MyCursorPagination
 
-class OnePostComment(LoginRequiredMixin, CreateView):
-    model = Comment
-    form_class = CommentPostForm
-    # template_name = 'postId.html'
 
-    def get_success_url(self):
-        return reverse('post_id', kwargs={'pk': self.kwargs['pk']})
+class CommentsView(ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
-    def form_valid(self, form):
-        post = get_object_or_404(Post, pk=self.kwargs['pk'])
-        form.instance.user = self.request.user
-        form.instance.post = post
-        return super().form_valid(form)
-    
 
-class PostsByUser(generics.ListAPIView):
+class BlogsViewById(RetrieveUpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    
-    def get_queryset(self):
-        qs = super().get_queryset()
-        return qs.filter(author=self.request.user)
-    
+    lookup_field = 'pk'
+
+
+class CommentsViewById(RetrieveUpdateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    lookup_field = 'pk'

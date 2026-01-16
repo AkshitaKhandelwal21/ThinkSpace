@@ -3,11 +3,17 @@ from django.urls import path
 from blogs import views
 
 urlpatterns = [
-    path('allblogs/', views.PostsList.as_view(), name='all_posts'),
-    path('newblog/', views.CreatePost.as_view(), name='create_post'),
-    path('post/<int:pk>/', views.OnePost.as_view(), name='post_id'),
-    path('post/<int:pk>/update/', views.PostUpdate.as_view(), name='post_update'),
-    path('post/<int:pk>/delete/', views.PostDelete.as_view(), name='delete_post'),
-    path('post/<int:pk>/comment/', views.OnePostComment.as_view(), name='comment'),
-    path('user_posts/', views.PostsByUser.as_view(), name='User_Posts'),
+    # path('allblogs/', views.PostsList.as_view(), name='all_posts'),
+    # path('newblog/', views.CreatePost.as_view(), name='create_post'),
+    # path('post/<int:pk>/', views.OnePost.as_view(), name='post_id'),
+    # path('post/<int:pk>/update/', views.PostUpdate.as_view(), name='post_update'),
+    # path('post/<int:pk>/delete/', views.PostDelete.as_view(), name='delete_post'),
+    # path('post/<int:pk>/comment/', views.OnePostComment.as_view(), name='comment'),
+    # path('user_posts/', views.PostsByUser.as_view(), name='User_Posts'),
+
+    path('blogs/', views.BlogsView.as_view()),
+    path('comments/', views.CommentsView.as_view()),
+    
+    path('blogs/<int:pk>/', views.BlogsViewById.as_view()),
+    path('comments/<int:pk>', views.CommentsViewById.as_view()),
 ]
