@@ -210,3 +210,4 @@ __marimo__/
 accounts/migrations
 blogs/migrations
 comments/migrations
+DRF/migrations

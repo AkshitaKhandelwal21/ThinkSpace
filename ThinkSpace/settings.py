@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blogs',
     'accounts',
     'comments',
+    'DRF',
 ]
 
 MIDDLEWARE = [
