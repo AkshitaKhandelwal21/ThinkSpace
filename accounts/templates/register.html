@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - BlogSpace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body
+    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-6">
+                <!-- Registration Card -->
+                <div class="card border-0 shadow-lg"
+                    style="border-radius: 25px; overflow: hidden; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
+                    <div class="row g-0">
+                        <!-- Left Side - Branding -->
+                        <div class="col-md-5 d-none d-md-flex"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 3rem; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: white;">
+                            <div style="margin-bottom: 2rem;">
+                                <i class="fas fa-blog" style="font-size: 4rem; margin-bottom: 1rem;"></i>
+                                <h2 style="font-weight: 700; font-size: 2rem; margin-bottom: 1rem;">BlogSpace</h2>
+                                <p style="font-size: 1.1rem; line-height: 1.6; opacity: 0.9;">Join our community of
+                                    writers and readers. Share your stories with the world.</p>
+                            </div>
+                            <div style="margin-top: auto;">
+                                <i class="fas fa-users" style="font-size: 2rem; opacity: 0.7;"></i>
+                                <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">10,000+ Active Writers
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Right Side - Registration Form -->
+                        <div class="col-md-7">
+                            <div style="padding: 3rem 2.5rem;">
+                                <!-- Header -->
+                                <div style="text-align: center; margin-bottom: 2rem;">
+                                    <h3
+                                        style="font-weight: 700; color: #2d3748; font-size: 1.8rem; margin-bottom: 0.5rem;">
+                                        Create Account</h3>
+                                    <p style="color: #718096; font-size: 0.95rem;">Start your blogging journey today</p>
+                                </div>
+
+                                <!-- Registration Form -->
+                                <form action="" method="POST">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn w-100"
+                                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; padding: 0.875rem; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); margin-bottom: 1rem;"
+                                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)';"
+                                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';">
+                                        <i class="fas fa-user-plus me-2"></i>Create Account
+                                    </button>
+                                </form>
+                                <!-- Terms & Conditions -->
+                                <div style="margin-bottom: 1.5rem;">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="terms" name="terms" required
+                                            style="width: 18px; height: 18px; border: 2px solid #e2e8f0; border-radius: 4px; cursor: pointer;">
+                                        <label class="form-check-label" for="terms"
+                                            style="color: #4a5568; font-size: 0.9rem; cursor: pointer; margin-left: 0.5rem;">
+                                            I agree to the <a href="#"
+                                                style="color: #667eea; text-decoration: none; font-weight: 600;"
+                                                onmouseover="this.style.textDecoration='underline';"
+                                                onmouseout="this.style.textDecoration='none';">Terms &
+                                                Conditions</a>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Social Sign Up -->
+                                <div style="text-align: center; margin: 1.5rem 0;">
+                                    <span
+                                        style="color: #718096; font-size: 0.9rem; position: relative; display: inline-block;">
+                                        <span
+                                            style="background: white; padding: 0 1rem; position: relative; z-index: 1;">Or
+                                            sign up with</span>
+                                        <span
+                                            style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: #e2e8f0; z-index: 0;"></span>
+                                    </span>
+                                </div>
+
+                                <!-- Social Buttons -->
+                                <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                                    <button type="button" class="btn flex-fill"
+                                        style="border: 2px solid #e2e8f0; background: white; border-radius: 12px; padding: 0.75rem; transition: all 0.3s ease;"
+                                        onmouseover="this.style.borderColor='#667eea'; this.style.background='#f7fafc';"
+                                        onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';">
+                                        <i class="fab fa-google" style="color: #EA4335; font-size: 1.2rem;"></i>
+                                    </button>
+                                    <button type="button" class="btn flex-fill"
+                                        style="border: 2px solid #e2e8f0; background: white; border-radius: 12px; padding: 0.75rem; transition: all 0.3s ease;"
+                                        onmouseover="this.style.borderColor='#667eea'; this.style.background='#f7fafc';"
+                                        onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';">
+                                        <i class="fab fa-facebook-f" style="color: #1877F2; font-size: 1.2rem;"></i>
+                                    </button>
+                                    <button type="button" class="btn flex-fill"
+                                        style="border: 2px solid #e2e8f0; background: white; border-radius: 12px; padding: 0.75rem; transition: all 0.3s ease;"
+                                        onmouseover="this.style.borderColor='#667eea'; this.style.background='#f7fafc';"
+                                        onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';">
+                                        <i class="fab fa-github" style="color: #333; font-size: 1.2rem;"></i>
+                                    </button>
+                                </div>
+
+                                <!-- Login Link -->
+                                <div style="text-align: center;">
+                                    <p style="color: #718096; font-size: 0.9rem; margin: 0;">
+                                        Already have an account?
+                                        <a href="#" style="color: #667eea; text-decoration: none; font-weight: 600;"
+                                            onmouseover="this.style.textDecoration='underline';"
+                                            onmouseout="this.style.textDecoration='none';">Sign In</a>
+                                    </p>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Branding (visible only on mobile) -->
+                <div class="d-md-none text-center mt-4" style="color: white;">
+                    <i class="fas fa-blog" style="font-size: 2.5rem; margin-bottom: 0.5rem;"></i>
+                    <h2 style="font-weight: 700; font-size: 1.5rem;">BlogSpace</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

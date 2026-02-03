@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post - BlogSpace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px 0;">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark"
+        style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); margin-bottom: 2rem;">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#" style="font-size: 1.5rem; letter-spacing: 1px;">
+                <i class="fas fa-blog me-2"></i>BlogSpace
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-9">
+                <!-- Create Post Card -->
+                <div class="card border-0 shadow-lg"
+                    style="border-radius: 25px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); overflow: hidden;">
+                    <!-- Card Header -->
+                    <div
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; color: white;">
+                        <div
+                            style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <h2 style="font-weight: 700; font-size: 2rem; margin: 0; margin-bottom: 0.5rem;">
+                                    <i class="fas fa-pen-fancy me-2"></i>Create New Post
+                                </h2>
+                                <p style="margin: 0; font-size: 1rem; opacity: 0.9;">Share your thoughts with the world
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Body -->
+                    <div style="padding: 3rem 2.5rem;">
+                        <!-- Form Container (Backend form will be injected here) -->
+                        <form method="POST" action="" enctype="multipart/form-data">
+                            <!-- Backend form fields will be rendered here -->
+
+                            {% csrf_token %}
+
+                            <div style="margin-bottom: 2rem;">
+                                <label
+                                    style="display: block; font-weight: 600; color: #2d3748; margin-bottom: 0.75rem; font-size: 1rem;">
+                                    <i class="fas fa-heading me-2" style="color: #667eea;"></i>Post Title
+                                </label>
+                                {{ form.title}}
+                                {{ form.title.errors }}
+                            </div>
+
+                            <div style="margin-bottom: 2rem;">
+                                <label
+                                    style="display: block; font-weight: 600; color: #2d3748; margin-bottom: 0.75rem; font-size: 1rem;">
+                                    <i class="fas fa-heading me-2" style="color: #667eea;"></i>Heading
+                                </label>
+                                {{ form.slug }}
+                                {{ form.slug.errors }}
+                            </div>
+
+                            <div style="margin-bottom: 2rem;">
+                                <label
+                                    style="display: block; font-weight: 600; color: #2d3748; margin-bottom: 0.75rem; font-size: 1rem;">
+                                    <i class="fas fa-align-left me-2" style="color: #667eea;"></i>Content
+                                </label>
+                                {{ form.content }}
+                                {{ form.content.errors }}
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div style="display: flex; gap: 1rem; justify-content: flex-end; flex-wrap: wrap;">
+                                <button type="button" class="btn"
+                                    style="background: white; color: #718096; border: 2px solid #e2e8f0; border-radius: 12px; padding: 0.875rem 2rem; font-weight: 600; font-size: 1rem; transition: all 0.3s ease;"
+                                    onmouseover="this.style.borderColor='#cbd5e0'; this.style.background='#f7fafc';"
+                                    onmouseout="this.style.borderColor='#e2e8f0'; this.style.background='white';">
+                                    <i class="fas fa-times me-2"></i>Cancel
+                                </button>
+                                <button type="submit" class="btn"
+                                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 12px; padding: 0.875rem 2.5rem; font-weight: 600; font-size: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);"
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)';"
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';">
+                                    <i class="fas fa-paper-plane me-2"></i>Publish Post
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Tips Section -->
+                <div class="card border-0 shadow-lg mt-4"
+                    style="border-radius: 20px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); padding: 2rem;">
+                    <h5 style="font-weight: 600; color: #2d3748; margin-bottom: 1rem; font-size: 1.1rem;">
+                        <i class="fas fa-lightbulb me-2" style="color: #f6ad55;"></i>Writing Tips
+                    </h5>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                        <div style="display: flex; align-items: start; gap: 0.75rem;">
+                            <i class="fas fa-check-circle"
+                                style="color: #48bb78; font-size: 1.2rem; margin-top: 0.2rem;"></i>
+                            <div>
+                                <p style="margin: 0; color: #4a5568; font-size: 0.9rem; font-weight: 500;">Use clear,
+                                    concise language</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: start; gap: 0.75rem;">
+                            <i class="fas fa-check-circle"
+                                style="color: #48bb78; font-size: 1.2rem; margin-top: 0.2rem;"></i>
+                            <div>
+                                <p style="margin: 0; color: #4a5568; font-size: 0.9rem; font-weight: 500;">Add relevant
+                                    images and media</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: start; gap: 0.75rem;">
+                            <i class="fas fa-check-circle"
+                                style="color: #48bb78; font-size: 1.2rem; margin-top: 0.2rem;"></i>
+                            <div>
+                                <p style="margin: 0; color: #4a5568; font-size: 0.9rem; font-weight: 500;">Break content
+                                    into sections</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
